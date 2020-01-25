@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
@@ -8,6 +9,8 @@ import numpy as np
 import joblib
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 soc_code_encoder = joblib.load('Joblib Files/soc_code_encoder.joblib')
 work_state_encoder = joblib.load('Joblib Files/work_state_encoder.joblib')
