@@ -25,14 +25,14 @@ def get_prediction():
   try:
     content = request.get_json()
     
-    content['ocupation_code'] = soc_code_encoder.transform([content['ocupation_code'].lower()])[0]
+    content['occupation_code'] = soc_code_encoder.transform([content['occupation_code'].lower()])[0]
     content['worksite_state'] = work_state_encoder.transform([content['worksite_state'].lower()])[0]
     content['employment_duration_days'] = employment_days_scaler.transform([[content['employment_duration_days']]])[0][0]
     
     print(content)
     
     data = [[
-      content['ocupation_code'],
+      content['occupation_code'],
       content['full_time_position'],
       content['worksite_state'],
       content['employment_duration_days']
@@ -68,8 +68,8 @@ def get_states():
     )
   )
 
-@app.route('/ocupations')
-def get_ocupation_codes():
+@app.route('/occupations')
+def get_occupation_codes():
   return jsonify(
     list(
       map(lambda x: {
