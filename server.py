@@ -43,12 +43,15 @@ def get_prediction():
 
     prediction = classifier.predict(data)
     probability = np.max(classifier.predict_proba(data))
+    
+    if probability == 1:
+      probability = 0.999
 
     label = {True: 'Certified', False: 'Denied'}
 
     response = jsonify({
       "status": "Prediction made",
-      "result": "Prediction: " + label[prediction[0]] + " (" + str(np.round(probability*100, 1)) + "%)"
+      "result": "Prediction: There's a " + str(np.round(probability*100, 1)) + "% probability that your visa will be " + label[prediction[0]]
     })
 
     response.headers.add('Access-Control-Allow-Origin', '*')
